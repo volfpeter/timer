@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Timer
+GenericName=Timer App
+Comment=Simple timer application
+Categories=Accessories;Office;
+Exec=com.github.volfpeter.timer
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Keywords=Timer;Watch;Stopwatch;Clock;Alarm;

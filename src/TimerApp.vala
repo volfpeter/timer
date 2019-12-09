@@ -52,8 +52,8 @@ public class MyApp : Gtk.Application {
     }
 
     private void _set_window_properties(Gtk.ApplicationWindow window) {
-        window.default_height = 400;
-        window.default_width = 600;
+        window.default_height = 200;
+        window.default_width = 300;
         window.title = "Hello World";
     }
 
