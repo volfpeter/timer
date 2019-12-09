@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019 Peter Volf <do.volfp@gmail.com> -->
+<component type="desktop">
+  <id>com.github.volfpeter.timer</id>
+  <metadata_license>CC0</metadata_license>
+  <name>Timer</name>
+  <summary>Minimalist timer application</summary>
+  <description>
+    <p>Minimalist timer application that helps you schedule your activity.</p>
+    <p>Stays out of your way by simply popping up a notification when completed.</p>
+    <p>Use it as your flexible pomodoro timer or just set a reminder so you don't forget about your next task.</p>
+  </description>
+  <custom>
+    <value key="x-appcenter-suggested-price">2</value>
+  </custom>
+</component>
