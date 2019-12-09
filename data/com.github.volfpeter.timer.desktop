@@ -2,7 +2,7 @@
 Name=Timer
 GenericName=Timer App
 Comment=Minimalist timer application
-Categories=Accessories;Office;
+Categories=Office;Utility;
 Exec=com.github.volfpeter.timer
 Icon=application-default-icon
 Terminal=false
