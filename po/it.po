@@ -1,0 +1,63 @@
+# Italian translations for com.github.volfpeter.timer package.
+# Copyright (C) 2019 THE com.github.volfpeter.timer'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.volfpeter.timer package.
+# Automatically generated, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.volfpeter.timer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-10 18:31+0100\n"
+"PO-Revision-Date: 2019-12-10 18:31+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/TimerApp.vala:45
+msgid "Click here!"
+msgstr ""
+
+#: src/TimerApp.vala:48
+msgid "Hello World!"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.desktop.in:3
+#: data/com.github.volfpeter.timer.appdata.xml.in:6
+msgid "Timer"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.desktop.in:4
+msgid "Timer App"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.desktop.in:5
+#: data/com.github.volfpeter.timer.appdata.xml.in:7
+msgid "Minimalist timer application"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.desktop.in:8
+msgid "application-default-icon"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.desktop.in:11
+msgid "Timer;Watch;Stopwatch;Stopper;Clock;Alarm;Pomodoro;"
+msgstr ""
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:9
+msgid "Minimalist timer application that helps you schedule your activity."
+msgstr ""
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:10
+msgid ""
+"Stays out of your way by simply popping up a notification when completed."
+msgstr ""
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:11
+msgid ""
+"Use it as your flexible pomodoro timer or just set a reminder so you don't "
+"forget about your next task."
+msgstr ""

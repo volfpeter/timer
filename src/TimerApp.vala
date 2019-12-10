@@ -42,10 +42,10 @@ public class MyApp : Gtk.Application {
     }
 
     private Gtk.Button _create_hellow_world_button() {
-        var button = new Gtk.Button.with_label("Click here!");
+        var button = new Gtk.Button.with_label(_("Click here!"));
         button.margin = 12;
         button.clicked.connect(() => {
-            button.label = "Heló World!";
+            button.label = _("Hello World!");
             button.sensitive = false;
         });
         return button;
