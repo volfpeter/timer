@@ -32,29 +32,87 @@ public class MyApp : Gtk.Application {
         var main_window = new Gtk.ApplicationWindow(this);
 
         this._set_window_properties(main_window);
-        this._add_main_window_content(main_window);
+        this._add_main_view(main_window);
 
         main_window.show_all();
     }
 
-    private void _add_main_window_content(Gtk.ApplicationWindow window) {
-        window.add(this._create_hellow_world_button());
+    private void _add_main_view(Gtk.ApplicationWindow window) {
+        var hours_entry = this._create_spin_button(0, 99);
+        var minutes_entry = this._create_spin_button(0, 59);
+        minutes_entry.wrapped.connect(() => {
+            if (minutes_entry.value == 0) {
+                // Wrapped in the positive direction.
+                hours_entry.spin(Gtk.SpinType.STEP_FORWARD, 1);
+            } else {
+                // Wrapped in the negative direction.
+                if (hours_entry.value == 0) {
+                    minutes_entry.value = 0;
+                } else {
+                    hours_entry.spin(Gtk.SpinType.STEP_BACKWARD, 1);
+                }
+            }
+        });
+        var seconds_entry = this._create_spin_button(0, 59);
+        seconds_entry.wrapped.connect(() => {
+            if (seconds_entry.value == 0) {
+                // Wrapped in the positive direction.
+                minutes_entry.spin(Gtk.SpinType.STEP_FORWARD, 1);
+            } else {
+                // Wrapped in the negative direction.
+                if (hours_entry.value == 0 && minutes_entry.value == 0) {
+                    seconds_entry.value = 0;
+                } else {
+                    minutes_entry.spin(Gtk.SpinType.STEP_BACKWARD, 1);
+                }
+            }
+        });
+
+        var message_entry = new Gtk.Entry();
+        message_entry.placeholder_text = _("Timer completed!");
+
+        var clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
+        var start_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
+        start_button.clicked.connect(() => {
+            var notification = new Notification(_("Timer completed"));
+            notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
+            notification.set_icon(new GLib.ThemedIcon("appointment-missed"));
+            this.send_notification("com.github.volfpeter.timer", notification);
+        });
+        var pause_button = new Gtk.Button.from_icon_name("media-playback-pause-symbolic");
+        var reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
+
+        var top_row = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
+        top_row.homogeneous = true;
+        top_row.add(hours_entry);
+        top_row.add(minutes_entry);
+        top_row.add(seconds_entry);
+
+        var bottom_row = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
+        bottom_row.homogeneous = true;
+        bottom_row.add(clock_button);
+        bottom_row.add(start_button);
+        bottom_row.add(pause_button);
+        bottom_row.add(reset_button);
+
+        var column = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
+        column.margin = 6;
+        column.add(top_row);
+        column.add(bottom_row);
+        column.add(message_entry);
+
+        window.add(column);
     }
 
-    private Gtk.Button _create_hellow_world_button() {
-        var button = new Gtk.Button.with_label(_("Click here!"));
-        button.margin = 12;
-        button.clicked.connect(() => {
-            button.label = _("Hello World!");
-            button.sensitive = false;
-        });
+    private Gtk.SpinButton _create_spin_button(int min, int max) {
+        var button = new Gtk.SpinButton.with_range(min, max, 1);
+        button.snap_to_ticks = true;
+        button.wrap = true;
         return button;
     }
 
     private void _set_window_properties(Gtk.ApplicationWindow window) {
-        window.default_height = 200;
-        window.default_width = 300;
-        window.title = "Hello World";
+        window.title = "Timer";
     }
 
     public static int main(string[] args) {

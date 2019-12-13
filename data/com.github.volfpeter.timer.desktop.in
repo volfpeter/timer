@@ -8,3 +8,4 @@ Icon=application-default-icon
 Terminal=false
 Type=Application
 Keywords=Timer;Watch;Stopwatch;Stopper;Clock;Alarm;Pomodoro;
+X-GNOME-UsesNotifications=true
