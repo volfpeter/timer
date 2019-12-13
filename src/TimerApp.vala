@@ -76,7 +76,7 @@ public class MyApp : Gtk.Application {
         start_button.clicked.connect(() => {
             var notification = new Notification(_("Timer completed"));
             notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
-            notification.set_icon(new GLib.ThemedIcon("appointment-missed"));
+            notification.set_icon(new GLib.ThemedIcon("appointment"));
             this.send_notification("com.github.volfpeter.timer", notification);
         });
         var pause_button = new Gtk.Button.from_icon_name("media-playback-pause-symbolic");
