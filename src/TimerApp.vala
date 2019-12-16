@@ -29,18 +29,87 @@ public class MyApp : Gtk.Application {
     }
 
     protected override void activate() {
-        var main_window = new Gtk.ApplicationWindow(this);
-
-        this._set_window_properties(main_window);
-        this._add_main_view(main_window);
-        this._set_custom_actions(main_window);
-
+        var main_window = new MainWindow(this);
+        this.set_custom_actions(main_window);
         main_window.show_all();
     }
 
-    private void _add_main_view(Gtk.ApplicationWindow window) {
-        var hours_entry = this._create_spin_button(0, 99);
-        var minutes_entry = this._create_spin_button(0, 59);
+    private void set_custom_actions(Gtk.ApplicationWindow window) {
+        // -- Quit on Control + Q
+        var quit_action = new SimpleAction("quit", null);
+        quit_action.activate.connect(() => {
+            if (window != null) {
+                window.destroy();
+            }
+        });
+        this.add_action(quit_action);
+        this.set_accels_for_action("app.quit", {"<Control>q"});
+    }
+
+    public static int main(string[] args) {
+        var app = new MyApp();
+        return app.run(args);
+    }
+}
+
+private class MainWindow : Gtk.ApplicationWindow {
+
+    private TimerRow timer_row;
+    private ControlRow control_row;
+    private Gtk.Entry message_entry;
+
+    public MainWindow(Gtk.Application application) {
+        Object(
+            application: application,
+            title: _("Timer")
+        );
+    }
+
+    construct {
+        timer_row = new TimerRow();
+        timer_row.timer_completed.connect(send_notification);
+
+        control_row = new ControlRow();
+
+        message_entry = new Gtk.Entry();
+        message_entry.placeholder_text = _("Timer completed!");
+
+        var column = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
+        column.margin = 6;
+        column.add(timer_row);
+        column.add(control_row);
+        column.add(message_entry);
+
+        add(column);
+    }
+
+    private void send_notification() {
+        var notification = new Notification(_("Timer completed"));
+        notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
+        notification.set_icon(new GLib.ThemedIcon("appointment"));
+        application.send_notification("com.github.volfpeter.timer", notification);
+    }
+}
+
+private class TimerRow : Gtk.Box {
+
+    private Gtk.SpinButton hours_entry;
+    private Gtk.SpinButton minutes_entry;
+    private Gtk.SpinButton seconds_entry;
+
+    public TimerRow() {
+        Object(
+            orientation: Gtk.Orientation.HORIZONTAL,
+            homogeneous: true,
+            spacing: 6
+        );
+    }
+
+    construct {
+        hours_entry = create_spin_button(0, 99);
+        minutes_entry = create_spin_button(0, 59);
+        seconds_entry = create_spin_button(0, 59);
+
         minutes_entry.wrapped.connect(() => {
             if (minutes_entry.value == 0) {
                 // Wrapped in the positive direction.
@@ -54,7 +123,7 @@ public class MyApp : Gtk.Application {
                 }
             }
         });
-        var seconds_entry = this._create_spin_button(0, 59);
+
         seconds_entry.wrapped.connect(() => {
             if (seconds_entry.value == 0) {
                 // Wrapped in the positive direction.
@@ -69,68 +138,45 @@ public class MyApp : Gtk.Application {
             }
         });
 
-        var message_entry = new Gtk.Entry();
-        message_entry.placeholder_text = _("Timer completed!");
-
-        var clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
-        var start_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
-        start_button.clicked.connect(() => {
-            var notification = new Notification(_("Timer completed"));
-            notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
-            notification.set_icon(new GLib.ThemedIcon("appointment"));
-            this.send_notification("com.github.volfpeter.timer", notification);
-        });
-        var pause_button = new Gtk.Button.from_icon_name("media-playback-pause-symbolic");
-        var reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
-
-        var top_row = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-        top_row.homogeneous = true;
-        top_row.add(hours_entry);
-        top_row.add(minutes_entry);
-        top_row.add(seconds_entry);
-
-        var bottom_row = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
-        bottom_row.homogeneous = true;
-        bottom_row.add(clock_button);
-        bottom_row.add(start_button);
-        bottom_row.add(pause_button);
-        bottom_row.add(reset_button);
-
-        var column = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
-        column.margin = 6;
-        column.add(top_row);
-        column.add(bottom_row);
-        column.add(message_entry);
-
-        window.add(column);
+        add(hours_entry);
+        add(minutes_entry);
+        add(seconds_entry);
     }
 
-    private Gtk.SpinButton _create_spin_button(int min, int max) {
+    public signal void timer_completed();
+
+    private Gtk.SpinButton create_spin_button(int min, int max) {
         var button = new Gtk.SpinButton.with_range(min, max, 1);
         button.snap_to_ticks = true;
         button.wrap = true;
         return button;
     }
+}
 
-    private void _set_custom_actions(Gtk.ApplicationWindow window) {
-        // -- Quit on Control + Q
-        var quit_action = new SimpleAction("quit", null);
-        quit_action.activate.connect(() => {
-            if (window != null) {
-                window.destroy();
-            }
-        });
-        this.add_action(quit_action);
-        this.set_accels_for_action("app.quit", {"<Control>q"});
+private class ControlRow : Gtk.Box {
 
+    private Gtk.Button clock_button;
+    private Gtk.Button start_button;
+    private Gtk.Button pause_button;
+    private Gtk.Button reset_button;
+
+    public ControlRow() {
+        Object(
+            orientation: Gtk.Orientation.HORIZONTAL,
+            homogeneous: true,
+            spacing: 6
+        );
     }
 
-    private void _set_window_properties(Gtk.ApplicationWindow window) {
-        window.title = "Timer";
-    }
+    construct {
+        clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
+        start_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
+        pause_button = new Gtk.Button.from_icon_name("media-playback-pause-symbolic");
+        reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
 
-    public static int main(string[] args) {
-        var app = new MyApp();
-        return app.run(args);
+        add(clock_button);
+        add(start_button);
+        add(pause_button);
+        add(reset_button);
     }
 }
