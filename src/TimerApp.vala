@@ -33,6 +33,7 @@ public class MyApp : Gtk.Application {
 
         this._set_window_properties(main_window);
         this._add_main_view(main_window);
+        this._set_custom_actions(main_window);
 
         main_window.show_all();
     }
@@ -111,12 +112,25 @@ public class MyApp : Gtk.Application {
         return button;
     }
 
+    private void _set_custom_actions(Gtk.ApplicationWindow window) {
+        // -- Quit on Control + Q
+        var quit_action = new SimpleAction("quit", null);
+        quit_action.activate.connect(() => {
+            if (window != null) {
+                window.destroy();
+            }
+        });
+        this.add_action(quit_action);
+        this.set_accels_for_action("app.quit", {"<Control>q"});
+
+    }
+
     private void _set_window_properties(Gtk.ApplicationWindow window) {
         window.title = "Timer";
     }
 
     public static int main(string[] args) {
         var app = new MyApp();
-        return app.run (args);
+        return app.run(args);
     }
 }
