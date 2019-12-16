@@ -79,6 +79,9 @@ private class MainWindow : Gtk.ApplicationWindow {
             } else {
                 control.use_start_button();
             }
+
+            control.enable_start(timer.can_start);
+            control.enable_reset(timer.can_reset);
         });
         timer.can_reset_changed.connect(() => {
             control.enable_reset(timer.can_reset);
@@ -248,6 +251,8 @@ private class Timer : Gtk.Box {
         hours_entry.value = hours;
         minutes_entry.value = minutes;
         seconds_entry.value = seconds;
+
+        can_start_changed();
     }
 
     private Gtk.SpinButton create_spin_button(int min, int max) {
@@ -316,10 +321,14 @@ private class Control : Gtk.Box {
     }
 
     public void use_pause_button() {
-        start_pause_button.set_image(new Gtk.Image.from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON));
+        start_pause_button.set_image(
+            new Gtk.Image.from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON)
+        );
     }
 
     public void use_start_button() {
-        start_pause_button.set_image(new Gtk.Image.from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
+        start_pause_button.set_image(
+            new Gtk.Image.from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON)
+        );
     }
 }
