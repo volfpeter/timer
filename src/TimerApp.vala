@@ -381,7 +381,7 @@ class TimePickerPopover : Gtk.Popover {
             var time = picker.time;
             time = time.add_seconds(-time.get_seconds());
             var now = new GLib.DateTime.now();
-            while (time.compare(now) < 0) {
+            while (time.compare(now) < 1) {
                 time = time.add_days(1);
             }
             // Calculate the number of seconds remaining until the selected time
