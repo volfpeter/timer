@@ -379,11 +379,11 @@ class TimePickerPopover : Gtk.Popover {
         select_button.clicked.connect(() => {
             // Calculate the first date-time that has the selected time and is in the future.
             var time = picker.time;
+            time = time.add_seconds(-time.get_seconds());
             var now = new GLib.DateTime.now();
             while (time.compare(now) < 0) {
                 time = time.add_days(1);
             }
-            time = time.add_seconds(-time.get_seconds());
             // Calculate the number of seconds remaining until the selected time
             // and fire the picked signal.
             picked((int)(time.difference(now) / 1000000));
