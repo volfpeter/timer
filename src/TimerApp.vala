@@ -69,7 +69,15 @@ private class MainWindow : Gtk.ApplicationWindow {
         timer = new Timer();
         timer.timer_completed.connect(send_notification);
 
+        // TODO: Violating a few principles here by wiring the control's buttons
+        //       to the timer this way. The wiring should be handled through
+        //       delegates in the current setup...
         control = new Control();
+        control.clock_button.clicked.connect(() => {
+            var picker = new TimePickerPopover(control.clock_button);
+            picker.picked.connect(timer.set_seconds_and_start);
+            picker.show_all();
+        });
         control.start_pause_button.clicked.connect(timer.start_or_pause);
         control.reset_button.clicked.connect(timer.reset);
 
@@ -229,15 +237,6 @@ private class Timer : Gtk.Box {
 
     public signal void timer_completed();
 
-    public void start_or_pause() {
-        if (is_running) {
-            pause();
-        } else if (can_start) {
-            timer_id = GLib.Timeout.add_seconds(1, tick_handler);
-            is_running = true;
-        }
-    }
-
     public void reset() {
         pause();
 
@@ -253,6 +252,22 @@ private class Timer : Gtk.Box {
         seconds_entry.value = seconds;
 
         can_start_changed();
+    }
+
+    public void set_seconds_and_start(int seconds) {
+        pause();
+        base_seconds = seconds;
+        reset();
+        start_or_pause();
+    }
+
+    public void start_or_pause() {
+        if (is_running) {
+            pause();
+        } else if (can_start) {
+            timer_id = GLib.Timeout.add_seconds(1, tick_handler);
+            is_running = true;
+        }
     }
 
     private Gtk.SpinButton create_spin_button(int min, int max) {
@@ -313,10 +328,6 @@ private class Control : Gtk.Box {
 
     construct {
         clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
-        clock_button.clicked.connect(() => {
-            var picker = new TimePickerPopover(clock_button);
-            picker.show_all();
-        });
         start_pause_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
         start_pause_button.sensitive = false;
         reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
@@ -353,6 +364,8 @@ class TimePickerPopover : Gtk.Popover {
     private Granite.Widgets.TimePicker picker;
     private Gtk.Button select_button;
 
+    public signal void picked(int delay);
+
     public TimePickerPopover(Gtk.Widget widget) {
         Object(relative_to: widget);
     }
@@ -364,6 +377,16 @@ class TimePickerPopover : Gtk.Popover {
         );
         select_button = new Gtk.Button.from_icon_name("object-select-symbolic");
         select_button.clicked.connect(() => {
+            // Calculate the first date-time that has the selected time and is in the future.
+            var time = picker.time;
+            var now = new GLib.DateTime.now();
+            while (time.compare(now) < 0) {
+                time = time.add_days(1);
+            }
+            time = time.add_seconds(-time.get_seconds());
+            // Calculate the number of seconds remaining until the selected time
+            // and fire the picked signal.
+            picked((int)(time.difference(now) / 1000000));
             destroy();
         });
 
