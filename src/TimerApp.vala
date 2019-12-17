@@ -270,12 +270,23 @@ private class Timer : Gtk.Box {
     }
 
     private bool tick_handler() {
+        var entry = Unity.LauncherEntry.get_for_desktop_id("com.github.volfpeter.timer.desktop");
         seconds_entry.spin(Gtk.SpinType.STEP_BACKWARD, 1);
         if (!can_start) {
+            // Report progress
+            entry.progress = 1;
+            entry.progress_visible = false;
+            // Update state
             is_running = false;
             timer_completed();
+            // Remove tick_handler()
             return false;
+        } else {
+            // Report progress
+            entry.progress = 1 - (double)entries_as_seconds / (double)base_seconds;
+            entry.progress_visible = true;
         }
+
         return true;
     }
 
@@ -302,6 +313,10 @@ private class Control : Gtk.Box {
 
     construct {
         clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
+        clock_button.clicked.connect(() => {
+            var picker = new TimePickerPopover(clock_button);
+            picker.show_all();
+        });
         start_pause_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
         start_pause_button.sensitive = false;
         reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
@@ -331,4 +346,32 @@ private class Control : Gtk.Box {
             new Gtk.Image.from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON)
         );
     }
+}
+
+class TimePickerPopover : Gtk.Popover {
+
+    private Granite.Widgets.TimePicker picker;
+    private Gtk.Button select_button;
+
+    public TimePickerPopover(Gtk.Widget widget) {
+        Object(relative_to: widget);
+    }
+
+    construct {
+        picker = new Granite.Widgets.TimePicker.with_format(
+            Granite.DateTime.get_default_time_format(true, false),
+            Granite.DateTime.get_default_time_format(false, false)
+        );
+        select_button = new Gtk.Button.from_icon_name("object-select-symbolic");
+        select_button.clicked.connect(() => {
+            destroy();
+        });
+
+        var layout = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 6);
+        layout.margin = 6;
+        layout.add(picker);
+        layout.add(select_button);
+        add(layout);
+    }
+
 }
