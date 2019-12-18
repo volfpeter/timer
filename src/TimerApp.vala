@@ -61,6 +61,7 @@ private class MainWindow : Gtk.ApplicationWindow {
     public MainWindow(Gtk.Application application) {
         Object(
             application: application,
+            resizable: false,
             title: _("Timer")
         );
     }
