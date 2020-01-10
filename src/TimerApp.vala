@@ -21,9 +21,11 @@
 
 public class TimerApp : Gtk.Application {
 
+    public static string app_id = "com.github.volfpeter.timer";
+
     public TimerApp () {
         Object (
-            application_id: "com.github.volfpeter.timer",
+            application_id: TimerApp.app_id,
             flags: ApplicationFlags.FLAGS_NONE
         );
     }
@@ -49,6 +51,10 @@ public class TimerApp : Gtk.Application {
     public static int main(string[] args) {
         var app = new TimerApp();
         return app.run(args);
+    }
+
+    public static Unity.LauncherEntry get_launcher_entry() {
+        return Unity.LauncherEntry.get_for_desktop_id(TimerApp.app_id + ".desktop");
     }
 }
 
@@ -115,7 +121,10 @@ private class MainWindow : Gtk.ApplicationWindow {
         var notification = new Notification(_("Timer completed"));
         notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
         notification.set_icon(new GLib.ThemedIcon("appointment"));
-        application.send_notification("com.github.volfpeter.timer", notification);
+        // Set priority to urgent so the notification stays on the screen
+        // until the user closes it.
+        notification.set_priority(NotificationPriority.URGENT);
+        application.send_notification(TimerApp.app_id, notification);
     }
 }
 
@@ -255,11 +264,17 @@ private class Timer : Gtk.Box {
         can_start_changed();
     }
 
-    public void set_seconds_and_start(int seconds) {
+    public void set_seconds(int seconds, bool start = false) {
         pause();
         base_seconds = seconds;
         reset();
-        start_or_pause();
+        if (start) {
+            start_or_pause();
+        }
+    }
+
+    public void set_seconds_and_start(int seconds) {
+        set_seconds(seconds, true);
     }
 
     public void start_or_pause() {
@@ -286,7 +301,7 @@ private class Timer : Gtk.Box {
     }
 
     private bool tick_handler() {
-        var entry = Unity.LauncherEntry.get_for_desktop_id("com.github.volfpeter.timer.desktop");
+        var entry = TimerApp.get_launcher_entry();
         seconds_entry.spin(Gtk.SpinType.STEP_BACKWARD, 1);
         if (!can_start) {
             // Report progress
@@ -387,7 +402,7 @@ class TimePickerPopover : Gtk.Popover {
             }
             // Calculate the number of seconds remaining until the selected time
             // and fire the picked signal.
-            picked((int)(time.difference(now) / 1000000));
+            picked((int)(time.difference(now) * 10e-6));
             destroy();
         });
 
