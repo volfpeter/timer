@@ -419,7 +419,7 @@ class TimePickerPopover : Gtk.Popover {
             }
             // Calculate the number of seconds remaining until the selected time
             // and fire the picked signal.
-            picked((int)(time.difference(now) * 10e-6));
+            picked((int)(time.difference(now) / 1000000));
             destroy();
         });
 
