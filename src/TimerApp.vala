@@ -32,7 +32,13 @@ public class TimerApp : Gtk.Application {
 
     protected override void activate() {
         var main_window = new MainWindow(this);
+
         this.set_custom_actions(main_window);
+
+        var quicklist = new Dbusmenu.Menuitem();
+        main_window.add_quicklist_items(quicklist);
+        TimerApp.get_launcher_entry().quicklist = quicklist;
+
         main_window.show_all();
     }
 
@@ -115,6 +121,20 @@ private class MainWindow : Gtk.ApplicationWindow {
         column.add(message_entry);
 
         add(column);
+    }
+
+    public void add_quicklist_items(Dbusmenu.Menuitem quicklist) {
+        Dbusmenu.Menuitem item;
+        int[] minutes = {5, 10, 15, 20, 30, 45, 60, 90};
+        foreach (int m in minutes) {
+            item = new Dbusmenu.Menuitem();
+            /// TRANSLATORS: %i is the number of minutes to count down from.
+            item.property_set(Dbusmenu.MENUITEM_PROP_LABEL, _("%i minutes").printf(m));
+            item.item_activated.connect(() => {
+                this.timer.set_seconds_and_start(m * 60);
+            });
+            quicklist.child_append(item);
+        }
     }
 
     private void send_notification() {
@@ -222,9 +242,6 @@ private class Timer : Gtk.Box {
 
     private bool _is_running = false;
 
-    /**
-     * Whether the timer is running.
-     */
     public bool is_running {
         get {
             return _is_running;
