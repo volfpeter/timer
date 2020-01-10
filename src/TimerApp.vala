@@ -23,6 +23,17 @@ public class TimerApp : Gtk.Application {
 
     public static string app_id = "com.github.volfpeter.timer";
 
+    private static GLib.Settings _settings;
+
+    public static GLib.Settings settings {
+        get {
+            if (TimerApp._settings == null) {
+                TimerApp._settings = new GLib.Settings(TimerApp.app_id);
+            }
+            return TimerApp._settings;
+        }
+    }
+
     public TimerApp () {
         Object (
             application_id: TimerApp.app_id,
@@ -91,6 +102,8 @@ private class MainWindow : Gtk.ApplicationWindow {
             picker.picked.connect(timer.set_seconds_and_start);
             picker.show_all();
         });
+        control.enable_reset(timer.can_reset);
+        control.enable_start(timer.can_start);
         control.start_pause_button.clicked.connect(timer.start_or_pause);
         control.reset_button.clicked.connect(timer.reset);
 
@@ -150,12 +163,18 @@ private class MainWindow : Gtk.ApplicationWindow {
 
 private class Timer : Gtk.Box {
 
+    private static string SETTINGS_BASE_SECONDS = "base-seconds";
+
     public Timer() {
         Object(
             orientation: Gtk.Orientation.HORIZONTAL,
             homogeneous: true,
             spacing: 6
         );
+
+        this.remove.connect(() => {
+            TimerApp.settings.set_int(Timer.SETTINGS_BASE_SECONDS, base_seconds);
+        });
     }
 
     construct {
@@ -197,6 +216,8 @@ private class Timer : Gtk.Box {
         add(hours_entry);
         add(minutes_entry);
         add(seconds_entry);
+
+        set_seconds(TimerApp.settings.get_int(SETTINGS_BASE_SECONDS));
     }
 
     private uint timer_id;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/com/github/volfpeter/timer/" id="com.github.volfpeter.timer">
+    <key name="base-seconds" type="i">
+      <default>2700</default>
+      <summary>Base seconds</summary>
+      <description>The number of seconds the timer should count down from</description>
+    </key>
+  </schema>
+</schemalist>

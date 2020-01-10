@@ -38,4 +38,5 @@ i18n.merge_file(
     install_dir: join_paths(get_option('datadir'), 'metainfo')
 )
 
+subdir('data')
 subdir('po')
