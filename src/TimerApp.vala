@@ -77,6 +77,9 @@ public class TimerApp : Gtk.Application {
 
 private class MainWindow : Gtk.ApplicationWindow {
 
+    public static string SETTINGS_POSITION_X = "position-x";
+    public static string SETTINGS_POSITION_Y = "position-y";
+
     private Timer timer;
     private Control control;
     private Gtk.Entry message_entry;
@@ -134,6 +137,15 @@ private class MainWindow : Gtk.ApplicationWindow {
         column.add(message_entry);
 
         add(column);
+
+        move_to_preferred_position();
+        this.delete_event.connect((e) => {
+            int x, y;
+            get_position(out x, out y);
+            TimerApp.settings.set_int(MainWindow.SETTINGS_POSITION_X, x);
+            TimerApp.settings.set_int(MainWindow.SETTINGS_POSITION_Y, y);
+            return false;
+        });
     }
 
     public void add_quicklist_items(Dbusmenu.Menuitem quicklist) {
@@ -147,6 +159,14 @@ private class MainWindow : Gtk.ApplicationWindow {
                 this.timer.set_seconds_and_start(m * 60);
             });
             quicklist.child_append(item);
+        }
+    }
+
+    private void move_to_preferred_position() {
+        var x = TimerApp.settings.get_int(MainWindow.SETTINGS_POSITION_X);
+        var y = TimerApp.settings.get_int(MainWindow.SETTINGS_POSITION_Y);
+        if (x >= 0 && x >= 0) {
+            move(x, y);
         }
     }
 
