@@ -1,33 +1,42 @@
 # Hungarian translations for com.github.volfpeter.timer package.
-# Copyright (C) 2019 THE com.github.volfpeter.timer'S COPYRIGHT HOLDER
+# Copyright (C) 2020 THE com.github.volfpeter.timer'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.volfpeter.timer package.
-# Automatically generated, 2019.
+# Automatically generated, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.volfpeter.timer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 18:31+0100\n"
-"PO-Revision-Date: 2019-12-10 18:28+0100\n"
+"POT-Creation-Date: 2020-01-13 08:48+0100\n"
+"PO-Revision-Date: 2020-01-13 08:48+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/TimerApp.vala:45
-msgid "Click here!"
-msgstr ""
-
-#: src/TimerApp.vala:48
-msgid "Hello World!"
-msgstr ""
-
-#: data/com.github.volfpeter.timer.desktop.in:3
+#: src/TimerApp.vala:91 data/com.github.volfpeter.timer.desktop.in:3
 #: data/com.github.volfpeter.timer.appdata.xml.in:6
 msgid "Timer"
+msgstr ""
+
+#: src/TimerApp.vala:131
+msgid "Notification message"
+msgstr ""
+
+#: src/TimerApp.vala:157
+#, c-format
+msgid "%i minutes"
+msgstr ""
+
+#: src/TimerApp.vala:174
+msgid "Timer completed"
+msgstr ""
+
+#: src/TimerApp.vala:175
+msgid "The timer you set has completed."
 msgstr ""
 
 #: data/com.github.volfpeter.timer.desktop.in:4
@@ -40,7 +49,7 @@ msgid "Minimalist timer application"
 msgstr ""
 
 #: data/com.github.volfpeter.timer.desktop.in:8
-msgid "application-default-icon"
+msgid "appointment"
 msgstr ""
 
 #: data/com.github.volfpeter.timer.desktop.in:11
@@ -48,16 +57,17 @@ msgid "Timer;Watch;Stopwatch;Stopper;Clock;Alarm;Pomodoro;"
 msgstr ""
 
 #: data/com.github.volfpeter.timer.appdata.xml.in:9
-msgid "Minimalist timer application that helps you schedule your activity."
+msgid ""
+"Minimalist timer application that stays out of your way by simply popping up "
+"a notification when completed."
 msgstr ""
 
 #: data/com.github.volfpeter.timer.appdata.xml.in:10
 msgid ""
-"Stays out of your way by simply popping up a notification when completed."
+"Use it as your flexible pomodoro timer or just set a reminder so you don't "
+"forget about your next task."
 msgstr ""
 
 #: data/com.github.volfpeter.timer.appdata.xml.in:11
-msgid ""
-"Use it as your flexible pomodoro timer or just set a reminder so you don't "
-"forget about your next task."
+msgid "Not safe for rocket launch countdowns and the like 🚀."
 msgstr ""
