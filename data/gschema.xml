@@ -20,6 +20,11 @@
       <summary>Base seconds</summary>
       <description>The number of seconds the timer should count down from</description>
     </key>
+    <key name="notification-message" type="s">
+      <default>""</default>
+      <summary>Notification message</summary>
+      <description>The notification message to show to the user when the timer is completed</description>
+    </key>
 
   </schema>
 </schemalist>

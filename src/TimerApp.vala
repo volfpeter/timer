@@ -129,6 +129,7 @@ private class MainWindow : Gtk.ApplicationWindow {
 
         message_entry = new Gtk.Entry();
         message_entry.placeholder_text = _("Notification message");
+        TimerApp.settings.bind("notification-message", message_entry, "text", GLib.SettingsBindFlags.DEFAULT);
 
         var column = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
         column.margin = 6;
