@@ -13,7 +13,7 @@ executable(
     'src/TimerApp.vala',
     dependencies: [
         dependency('gtk+-3.0', version: '>=3.22'),
-        dependency('granite'),
+        dependency('granite', version: '>=5.0'),
         dependency('unity')
     ],
     install: true
