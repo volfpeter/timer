@@ -4,6 +4,7 @@
   <id>com.github.volfpeter.timer</id>
   <metadata_license>CC0</metadata_license>
   <name>Timer</name>
+  <developer_name>Peter Volf</developer_name>
   <summary>Minimalist timer application</summary>
   <description>
     <p>Minimalist timer application that stays out of your way by simply popping up a notification when completed.</p>
@@ -15,4 +16,8 @@
       <image>https://raw.githubusercontent.com/volfpeter/timer/master/assets/Timer-default-theme.png</image>
     </screenshot>
   </screenshots>
+  <content_rating type="oars-1.1" />
+  <url type="homepage">https://github.com/volfpeter/timer</url>
+  <url type="bugtracker">https://github.com/volfpeter/timer/issues</url>
+  <url type="help">https://github.com/volfpeter</url>
 </component>
