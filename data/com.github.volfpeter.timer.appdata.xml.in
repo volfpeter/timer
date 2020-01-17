@@ -10,4 +10,12 @@
     <p>Use it as your flexible pomodoro timer or just set a reminder so you don't forget about your next task.</p>
     <p>Not safe for rocket launch countdowns and the like 🚀.</p>
   </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/volfpeter/timer/master/assets/Timer-default-theme.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/volfpeter/timer/master/assets/Timer-dark-theme.png</image>
+    </screenshot>
+  </screenshots>
 </component>
