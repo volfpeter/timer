@@ -16,7 +16,8 @@
 
     <!-- Application settings -->
     <key name="base-seconds" type="i">
-      <default>2700</default>
+      <!-- 42 minutes -->
+      <default>2520</default>
       <summary>Base seconds</summary>
       <description>The number of seconds the timer should count down from</description>
     </key>
