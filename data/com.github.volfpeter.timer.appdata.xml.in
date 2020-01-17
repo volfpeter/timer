@@ -10,7 +10,4 @@
     <p>Use it as your flexible pomodoro timer or just set a reminder so you don't forget about your next task.</p>
     <p>Not safe for rocket launch countdowns and the like 🚀.</p>
   </description>
-  <custom>
-    <value key="x-appcenter-suggested-price">2</value>
-  </custom>
 </component>
