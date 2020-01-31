@@ -403,9 +403,12 @@ private class Control : Gtk.Box {
 
     construct {
         clock_button = new Gtk.Button.from_icon_name("tools-timer-symbolic");
+        clock_button.tooltip_text = _("Set Time");
         start_pause_button = new Gtk.Button.from_icon_name("media-playback-start-symbolic");
+        start_pause_button.tooltip_text = _("Start");
         start_pause_button.sensitive = false;
         reset_button = new Gtk.Button.from_icon_name("edit-undo-symbolic");
+        reset_button.tooltip_text = _("Reset");
         reset_button.sensitive = false;
 
         add(clock_button);
@@ -425,12 +428,14 @@ private class Control : Gtk.Box {
         start_pause_button.set_image(
             new Gtk.Image.from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON)
         );
+        start_pause_button.tooltip_text = _("Pause");
     }
 
     public void use_start_button() {
         start_pause_button.set_image(
             new Gtk.Image.from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON)
         );
+        start_pause_button.tooltip_text = _("Start");
     }
 }
 
@@ -451,6 +456,7 @@ class TimePickerPopover : Gtk.Popover {
             Granite.DateTime.get_default_time_format(false, false)
         );
         select_button = new Gtk.Button.from_icon_name("object-select-symbolic");
+        select_button.tooltip_text = _("Select");
         select_button.clicked.connect(() => {
             // Calculate the first date-time that has the selected time and is in the future.
             var time = picker.time;
