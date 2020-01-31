@@ -3,7 +3,7 @@
 <component type="desktop">
   <id>com.github.volfpeter.timer</id>
   <metadata_license>CC0</metadata_license>
-  <project_license>GPL-3.0-only</project_license>
+  <project_license>GPL-3.0</project_license>
   <name>Timer</name>
   <developer_name>Peter Volf</developer_name>
   <summary>Minimalist timer application</summary>
