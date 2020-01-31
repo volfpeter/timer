@@ -7,8 +7,8 @@ Use it as your flexible pomodoro timer or just set a reminder so you don't forge
 Not safe for rocket launch countdowns and the like :rocket:.
 
 <p align="center">
-  <img src="assets/Timer-default-theme.png" width="45%"/>
-  <img src="assets/Timer-dark-theme.png" width="45%" />
+  <img src="data/screenshots/Timer-default-theme.png" width="45%"/>
+  <img src="data/screenshots/Timer-dark-theme.png" width="45%" />
 </p>
 
 
