@@ -32,3 +32,7 @@ Dependencies required for building the application:
 Run `meson build --prefix=/usr` in the project folder to set up the build environment. Then change to the `build` directory and finally build and install the application with the `sudo ninja install` command.
 
 For additional information, see elementary OS' [Getting Started guide](https://elementary.io/docs/code/getting-started#developer-sdk).
+
+## Contributors
+
+- [NathanBnm](https://github.com/NathanBnm): Project structure and build upgrades.
