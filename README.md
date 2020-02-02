@@ -23,7 +23,7 @@ The application is written and officially supported for [elementary OS](https://
 
 Dependencies required for building the application:
 
-- `granite` >= 5.0
+- `granite`
 - `libgtk-3-dev`
 - `libunity-dev`
 - `meson`
