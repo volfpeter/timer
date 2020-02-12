@@ -1,0 +1,64 @@
+# French translations for extra package.
+# Copyright (C) 2020 THE extra'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the extra package.
+# Nathan Bonnemains (@NathanBnm), 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: extra\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-12 17:41+0100\n"
+"PO-Revision-Date: 2020-02-12 17:41+0100\n"
+"Last-Translator: Nathan Bonnemains (@NathanBnm)\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: data/com.github.volfpeter.timer.desktop.in:3
+#: data/com.github.volfpeter.timer.appdata.xml.in:7
+msgid "Timer"
+msgstr "Timer"
+
+#: data/com.github.volfpeter.timer.desktop.in:4
+msgid "Timer App"
+msgstr "Application de chronomètre"
+
+#: data/com.github.volfpeter.timer.desktop.in:5
+#: data/com.github.volfpeter.timer.appdata.xml.in:9
+msgid "Minimalist timer application"
+msgstr "Application de chronomètre minimaliste"
+
+#: data/com.github.volfpeter.timer.desktop.in:8
+msgid "com.github.volfpeter.timer"
+msgstr "com.github.volfpeter.timer"
+
+#: data/com.github.volfpeter.timer.desktop.in:11
+msgid "Timer;Watch;Stopwatch;Stopper;Clock;Alarm;Pomodoro;"
+msgstr "Chronomètre;Décompte;Compte à rebours;Horloge;Alarme;Pomodoro;"
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:8
+msgid "Peter Volf"
+msgstr "Peter Volf"
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:11
+msgid ""
+"Minimalist timer application that stays out of your way by simply popping up "
+"a notification when completed."
+msgstr ""
+"Application de chronomètre minimaliste qui ne vous embarasse pas en envoyant "
+"simplement une notification lorsque le décompte est terminé."
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:12
+msgid ""
+"Use it as your flexible pomodoro timer or just set a reminder so you don't "
+"forget about your next task."
+msgstr ""
+"Utilisez le de la même façon que votre chronomètre pomodoro ou bien définissez simplement "
+"un rappel pour ne pas oublier une tâche à venir."
+
+#: data/com.github.volfpeter.timer.appdata.xml.in:13
+msgid "Not safe for rocket launch countdowns and the like 🚀."
+msgstr "Pas très fiable pour les comptes à rebours de lancement de fusées entre autres 🚀."

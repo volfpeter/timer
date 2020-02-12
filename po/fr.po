@@ -1,0 +1,59 @@
+# French translations for com.github.volfpeter.timer package.
+# Copyright (C) 2020 THE com.github.volfpeter.timer'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.volfpeter.timer package.
+# Nathan Bonnemains (@NathanBnm), 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.volfpeter.timer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-12 17:41+0100\n"
+"PO-Revision-Date: 2020-02-12 17:41+0100\n"
+"Last-Translator: Nathan Bonnemains (@NathanBnm)\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/TimerApp.vala:91
+msgid "Timer"
+msgstr "Timer"
+
+#: src/TimerApp.vala:131
+msgid "Notification message"
+msgstr "Message de notification"
+
+#: src/TimerApp.vala:158
+#, c-format
+msgid "%i minutes"
+msgstr "%i minutes"
+
+#: src/TimerApp.vala:175
+msgid "Timer completed"
+msgstr "Chronomètre terminé"
+
+#: src/TimerApp.vala:176
+msgid "The timer you set has completed."
+msgstr "Le chronomètre que vous avez défini est terminé."
+
+#: src/TimerApp.vala:406
+msgid "Set Time"
+msgstr "Définir l'heure"
+
+#: src/TimerApp.vala:408 src/TimerApp.vala:438
+msgid "Start"
+msgstr "Démarrer"
+
+#: src/TimerApp.vala:411
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: src/TimerApp.vala:431
+msgid "Pause"
+msgstr "Mettre en pause"
+
+#: src/TimerApp.vala:459
+msgid "Select"
+msgstr "Sélectionner"
