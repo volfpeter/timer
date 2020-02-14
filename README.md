@@ -35,4 +35,4 @@ For additional information, see elementary OS' [Getting Started guide](https://e
 
 ## Contributors
 
-- [NathanBnm](https://github.com/NathanBnm): Project structure and build upgrades.
+- [NathanBnm](https://github.com/NathanBnm): Project structure and build upgrades, French translation.
