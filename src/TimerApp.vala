@@ -174,7 +174,7 @@ private class MainWindow : Gtk.ApplicationWindow {
     private void send_notification() {
         var notification = new Notification(_("Timer completed"));
         notification.set_body(message_entry.text != "" ? message_entry.text : _("The timer you set has completed."));
-        notification.set_icon(new GLib.ThemedIcon("appointment"));
+        notification.set_icon(new GLib.ThemedIcon("com.github.volfpeter.timer"));
         // Set priority to urgent so the notification stays on the screen
         // until the user closes it.
         notification.set_priority(NotificationPriority.URGENT);
